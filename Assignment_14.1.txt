@@ -1,0 +1,12 @@
+1) create database custom;
+2) use custom;
+
+3) create table temperature_data_temp (date string,zipcode int,temperature int) row format delimited fields terminated by ',' stored as textfile;
+
+4) load data local inpath '/tmp/dataset_14.txt' into table temperature_data_temp;
+
+5) create table temperature_data (date Date,zipcode int,temperature int) row format delimited fields terminated by ',' stored as textfile;
+
+6) insert into temperature_data select cast(to_date(from_unixtime(unix_timestamp(date,'MM-dd-yyyy'))) as date),zipcode,temperature from temperature_data_temp;
+
+
