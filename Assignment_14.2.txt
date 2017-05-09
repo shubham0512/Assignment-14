@@ -1,0 +1,13 @@
+1) select date,temperature,zipcode from temperature_data where zipcode >300000 and zipcode <399999;
+
+2) select year(date) as year,max(temperature) as temperature from temperature_data group by year(date);
+
+3) select year(date) as year,max(temperature) as temperature from temperature_data group by year(date) having count(*)>2;
+
+4) create view temperature_data_vw as select year(date) as year,max(temperature) as temperature from temperature_data group by year(date) having count(*)>2;
+
+5) INSERT OVERWRITE LOCAL DIRECTORY '/tmp/temperature_data/'
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '|'
+STORED AS TEXTFILE
+SELECT * FROM temperature_data_vw;
